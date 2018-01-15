@@ -9,10 +9,10 @@ import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
 @ComponentScan(basePackages = "com.dientm")
-public class JwtDemoApplication {
+public class Application {
 
     public static void main(String[] args) {
-        SpringApplication.run(JwtDemoApplication.class, args);
+        SpringApplication.run(Application.class, args);
     }
 
     @Bean

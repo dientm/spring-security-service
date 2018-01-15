@@ -114,7 +114,6 @@
                 <version>${docker-maven-plugin.version}</version>
 
                 <configuration>
-                    <imageName>hubae/jwt-spring-security-demo</imageName>
                     <baseImage>openjdk:8</baseImage>
                     <imageTags>
                         <imageTag>${project.version}</imageTag>
@@ -139,6 +138,6 @@
         </plugins>
     </build>
 
-    
+
 
 </project>
