@@ -1,6 +1,5 @@
 # config context path to "/" by setting an empty string
 server:
-  contextPath: /auth-service
   port: 8081
 
 # JACKSON
@@ -31,3 +30,9 @@ logging:
   level:
     org.springframework:
       security: DEBUG
+
+springfox:
+  documentation:
+    swagger:
+      v2:
+      path: ${management.context-path}/api-docs
