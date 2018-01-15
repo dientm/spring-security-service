@@ -2,6 +2,8 @@ package org.zerhusen.security;
 
 import io.jsonwebtoken.ExpiredJwtException;
 import org.assertj.core.util.DateUtil;
+import com.dientm.security.JwtTokenUtil;
+import com.dientm.security.JwtUser;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -9,7 +11,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.test.util.ReflectionTestUtils;
-import org.zerhusen.common.utils.TimeProvider;
+import com.dientm.utils.TimeProvider;
 
 import java.util.Date;
 import java.util.HashMap;
