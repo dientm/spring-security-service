@@ -26,7 +26,7 @@ public class SwaggerConfig {
             @Override
             public void addViewControllers(ViewControllerRegistry registry) {
                 registry.addViewController("/").setViewName(
-                        "forward:/swagger-ui.html");
+                            "forward:/swagger-ui.html");
             }
         };
     }

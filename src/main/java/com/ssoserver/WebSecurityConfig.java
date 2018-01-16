@@ -1,4 +1,4 @@
-package com.ssoserver.config;
+package com.ssoserver;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -80,7 +80,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/swagger-resources",
                         "/configuration/ui",
                         "/configuration/security",
-                        "/v2/api-docs"
+                        "/v2/api-docs",
+                        "swagger-ui.html"
                 ).permitAll()
                 .antMatchers("/auth/**").permitAll()
                 .anyRequest().authenticated();

@@ -11,8 +11,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
 @ComponentScan(basePackages = "com.ssoserver")
-@EntityScan("com.ssoserver.model")
-@EnableJpaRepositories("com.ssoserver.repository")
+//@EntityScan("com.ssoserver.model")
+//@EnableJpaRepositories("com.ssoserver.repository")
 public class Application {
 
     public static void main(String[] args) {

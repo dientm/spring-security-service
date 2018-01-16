@@ -1,4 +1,4 @@
-package com.ssoserver.config;
+package com.ssoserver;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

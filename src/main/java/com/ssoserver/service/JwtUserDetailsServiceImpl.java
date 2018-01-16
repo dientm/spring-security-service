@@ -1,6 +1,5 @@
 package com.ssoserver.service;
 
-import com.ssoserver.model.User;
 import com.ssoserver.security.JwtUserFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

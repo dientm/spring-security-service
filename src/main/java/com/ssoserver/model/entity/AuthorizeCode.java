@@ -9,7 +9,6 @@ public class AuthorizeCode implements Serializable {
     private String authCode;
     private String clientId;
     private String userId;
-    private String state;
     private long expireTime;
     private Date createDate;
 

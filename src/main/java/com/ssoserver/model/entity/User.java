@@ -7,56 +7,43 @@ import org.hibernate.annotations.DynamicUpdate;
 
 import java.io.Serializable;
 import java.util.Objects;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @DynamicInsert
 @DynamicUpdate
-@Table(name = "user")
+@Table(name = "USER")
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class User implements Serializable {
 
     @Id
-    @GeneratedValue
-//    @GenericGenerator(name = "sso-uuid", strategy = "com.ssoserver.SSOIDGenerator")
-    @Column(name = "id", nullable = false, length = 32)
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "user_seq")
+    @SequenceGenerator(name = "user_seq", sequenceName = "user_seq", allocationSize = 1)
+    @Column(name = "ID", nullable = false, length = 32)
     private String id;
 
-    @Column(name = "user_name", nullable = false, unique = true, length = 45)
+    @Column(name = "USER_NAME", nullable = false, unique = true, length = 45)
     private String userName;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @Column(name = "password_hash", nullable = false, length = 32)
-    private String passwordHash;
-
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @Column(name = "password_salt", nullable = false, length = 32)
+    @Column(name = "PASSWORD_SALT", nullable = false, length = 32)
     private String passwordSalt;
 
-    @Column(name = "first_name", nullable = false, length = 45)
+    @Column(name = "FIRST_NAME", nullable = false, length = 45)
     private String firstName;
 
-    @Column(name = "last_name", nullable = false, length = 45)
+    @Column(name = "LAST_NAME", nullable = false, length = 45)
     private String lastName;
 
-    @Column(name = "email_address", nullable = false, unique = true, length = 45)
+    @Column(name = "EMAIL_ADDRESS", nullable = false, unique = true, length = 45)
     private String email;
 
-    @Column(name = "phone_number", nullable = false, length = 16)
+    @Column(name = "PHONE_NUMBER", nullable = false, length = 16)
     private String phone;
 
-    @Column(name = "org_id")
-    private String orgId;
-
-    @Column(name = "sub_org_id")
-    private String subOrgId;
-
-    @Column(name = "status")
+    @Column(name = "STATUS")
     private int status;
 
     public User() {
@@ -76,14 +63,6 @@ public class User implements Serializable {
 
     public void setUserName(String userName) {
         this.userName = userName;
-    }
-
-    public String getPasswordHash() {
-        return passwordHash;
-    }
-
-    public void setPasswordHash(String passwordHash) {
-        this.passwordHash = passwordHash;
     }
 
     public String getPasswordSalt() {
@@ -134,32 +113,12 @@ public class User implements Serializable {
         this.status = status;
     }
 
-    public String getOrgId() {
-        return orgId;
-    }
-
-    public void setOrgId(String orgId) {
-        this.orgId = orgId;
-    }
-
-    public String getSubOrgId() {
-        return subOrgId;
-    }
-
-    public void setSubOrgId(String subOrgId) {
-        this.subOrgId = subOrgId;
-    }
-
-
-
-
 
     @Override
     public int hashCode() {
         int hash = 7;
         hash = 29 * hash + Objects.hashCode(this.id);
         hash = 29 * hash + Objects.hashCode(this.userName);
-        hash = 29 * hash + Objects.hashCode(this.passwordHash);
         hash = 29 * hash + Objects.hashCode(this.passwordSalt);
         hash = 29 * hash + Objects.hashCode(this.firstName);
         hash = 29 * hash + Objects.hashCode(this.lastName);
@@ -190,9 +149,6 @@ public class User implements Serializable {
             return false;
         }
         if (!Objects.equals(this.userName, other.userName)) {
-            return false;
-        }
-        if (!Objects.equals(this.passwordHash, other.passwordHash)) {
             return false;
         }
         if (!Objects.equals(this.passwordSalt, other.passwordSalt)) {
