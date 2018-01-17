@@ -1,21 +1,25 @@
-# config context path to "/" by setting an empty string
 server:
   port: 8080
 
-# JACKSON
 spring:
   jackson:
     serialization:
       INDENT_OUTPUT: true
   jpa:
     hibernate:
-      ddl-auto: create-drop
-    database-platform: org.hibernate.dialect.MySQLDialect
+      ddl-auto: create
+      naming:
+        strategy: org.hibernate.cfg.ImprovedNamingStrategy
+    show-sql: true
   datasource:
-    url: jdbc:mysql://localhost/test1
+    url: jdbc:mysql://localhost:3306/test1
     username: root
     password:
     driver-class-name: com.mysql.jdbc.Driver
+  redis:
+    host: 192.168.102.96
+    port: 6379
+    password: 123456a@
 
 jwt:
   header: Authorization
@@ -36,3 +40,5 @@ springfox:
     swagger:
       v2:
       path: ${management.context-path}/api-docs
+
+

@@ -1,13 +1,10 @@
 package com.ssoserver.redis.model;
 
 //import com.ssoserver.model.entity.AdminUser;
-import com.ssoserver.model.entity.App;
-import com.ssoserver.model.entity.AppRole;
 import com.ssoserver.model.entity.User;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 import java.util.Objects;
 
 public class RedisSession implements Serializable {
@@ -16,8 +13,7 @@ public class RedisSession implements Serializable {
     private String refreshToken;
 //    private AdminUser admin;
     private User user;
-    private App app;
-    private List<AppRole> userRoles;
+//    private List<AppRole> userRoles;
     private long expireTime; // millisecond
     private Date createdDate;
 
@@ -56,21 +52,6 @@ public class RedisSession implements Serializable {
         this.user = user;
     }
 
-    public App getApp() {
-        return app;
-    }
-
-    public void setApp(App app) {
-        this.app = app;
-    }
-
-    public List<AppRole> getUserRoles() {
-        return userRoles;
-    }
-
-    public void setUserRoles(List<AppRole> userRoles) {
-        this.userRoles = userRoles;
-    }
 
     public long getExpireTime() {
         return expireTime;
@@ -95,8 +76,6 @@ public class RedisSession implements Serializable {
         hash = 61 * hash + Objects.hashCode(this.refreshToken);
 //        hash = 61 * hash + Objects.hashCode(this.admin);
         hash = 61 * hash + Objects.hashCode(this.user);
-        hash = 61 * hash + Objects.hashCode(this.app);
-        hash = 61 * hash + Objects.hashCode(this.userRoles);
         hash = 61 * hash + (int) (this.expireTime ^ (this.expireTime >>> 32));
         hash = 61 * hash + Objects.hashCode(this.createdDate);
         return hash;
@@ -127,12 +106,6 @@ public class RedisSession implements Serializable {
             return false;
         }*/
         if (!Objects.equals(this.user, other.user)) {
-            return false;
-        }
-        if (!Objects.equals(this.app, other.app)) {
-            return false;
-        }
-        if (!Objects.equals(this.userRoles, other.userRoles)) {
             return false;
         }
         if (!Objects.equals(this.createdDate, other.createdDate)) {

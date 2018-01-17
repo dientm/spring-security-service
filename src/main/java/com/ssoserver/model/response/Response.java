@@ -1,4 +1,4 @@
-package com.ssoserver.model;
+package com.ssoserver.model.response;
 
 import java.io.Serializable;
 
@@ -13,6 +13,16 @@ public class Response<T extends Object> implements Serializable {
         this.data = data;
     }
 
+    public Response(APIStatus apiStatus, T data) {
+
+        if (apiStatus == null) {
+            throw new IllegalArgumentException("APIStatus must not be null");
+        }
+
+        this.status = apiStatus.getCode();
+        this.message = apiStatus.getDescription();
+        this.data = data;
+    }
     public int getStatus() {
         return status;
     }

@@ -1,7 +1,5 @@
 package com.ssoserver.redis.service;
 
-import com.ssoserver.api.response.APIStatus;
-import com.ssoserver.exception.ApplicationException;
 import com.ssoserver.redis.model.RedisSession;
 import com.ssoserver.redis.repository.RedisSessionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +25,7 @@ public class RedisSessionService {
      *
      * @return A RedisSession model, never return null
      */
-    public RedisSession findAndValidate(String accessToken) throws ApplicationException {
+    public RedisSession findAndValidate(String accessToken) {
 
         RedisSession session = redisSessionRepository.findOne(accessToken);
         // validate already exist session
@@ -35,11 +33,11 @@ public class RedisSessionService {
 
             // validate session expire time
             if (session.getExpireTime() - System.currentTimeMillis() <= 0) {
-                throw new ApplicationException(APIStatus.ERR_TOKEN_EXPIRED);
+//                throw new ApplicationException(APIStatus.ERR_TOKEN_EXPIRED);
             }
 
         } else {
-            throw new ApplicationException(APIStatus.ERR_INVALID_TOKEN);
+//            throw new ApplicationException(APIStatus.ERR_INVALID_TOKEN);
         }
 
         return session;
@@ -51,7 +49,7 @@ public class RedisSessionService {
      * @param accessToken
      * @throws ApplicationException if accessToken not found
      */
-    public void validateAndDelete(String accessToken) throws ApplicationException {
+    public void validateAndDelete(String accessToken) {
 
         RedisSession session = redisSessionRepository.findOne(accessToken);
         // validate already exist session
@@ -61,7 +59,7 @@ public class RedisSessionService {
             redisSessionRepository.delete(accessToken);
 
         } else {
-            throw new ApplicationException(APIStatus.ERR_INVALID_TOKEN);
+//            throw new ApplicationException(APIStatus.ERR_INVALID_TOKEN);
         }
     }
 

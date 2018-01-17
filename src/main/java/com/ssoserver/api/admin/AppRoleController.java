@@ -1,6 +1,6 @@
 package com.ssoserver.api.admin;
 
-import com.ssoserver.model.Response;
+import com.ssoserver.model.response.Response;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;

@@ -1,6 +1,5 @@
 package com.ssoserver.utils;
 
-import com.ssoserver.model.entity.AppRole;
 import org.springframework.util.StringUtils;
 
 import java.security.SecureRandom;
@@ -79,7 +78,7 @@ public class CommonUtil {
      * @return
      */
     @Deprecated
-    public static boolean isAdminConsole(List<AppRole> appRoles) {
+    /*public static boolean isAdminConsole(List<AppRole> appRoles) {
 
         if (appRoles != null && !appRoles.isEmpty()) {
             if (appRoles.stream().anyMatch((appRole) -> (appRole.isEnableAppAdmin()))) {
@@ -88,7 +87,7 @@ public class CommonUtil {
         }
 
         return (appRoles == null || appRoles.isEmpty());
-    }
+    }*/
 
     /**
      * Use to compare length of {@code str} is between min & max value
