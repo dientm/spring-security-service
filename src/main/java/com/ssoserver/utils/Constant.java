@@ -2,6 +2,9 @@ package com.ssoserver.utils;
 
 public interface Constant {
 
+
+    String AUTH_TYPE_BEARER = "Bearer";
+
     String SYSTEM_ADMIN_ID = "th1s1ssyst3m4dm1n0d3l3t3th1sus3r";
 
     /**
@@ -69,7 +72,7 @@ public interface Constant {
     int SALT_LENGTH = 6;
     String HEADER_TOKEN = "X-Access-Token";
     String REDIS_SESSION_KEY = "session";
-
+    Long REDIS_EXPIRE_TIME = 3600L;
     int CORE_POOL_SIZE = 5;
     int MAX_POOL_SIZE = 10;
     int QUEUE_CAPACITY = 25;

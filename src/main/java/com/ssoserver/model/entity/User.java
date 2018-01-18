@@ -1,16 +1,8 @@
 package com.ssoserver.model.entity;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import org.hibernate.annotations.DynamicInsert;
-import org.hibernate.annotations.DynamicUpdate;
-
 import java.io.Serializable;
-import java.util.Objects;
 import java.util.Set;
 import javax.persistence.*;
-
-import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "user")
@@ -28,6 +20,10 @@ public class User implements Serializable {
     private String email;
 
     private Set<Role> roles;
+
+    @EmbeddedId
+    private UserApp userapp;
+
 
     public User() {
     }
@@ -89,5 +85,13 @@ public class User implements Serializable {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    public UserApp getUserapp() {
+        return userapp;
+    }
+
+    public void setUserapp(UserApp userapp) {
+        this.userapp = userapp;
     }
 }

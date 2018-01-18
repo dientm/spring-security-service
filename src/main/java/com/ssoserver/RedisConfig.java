@@ -13,13 +13,13 @@ import org.springframework.data.redis.serializer.GenericToStringSerializer;
 public class RedisConfig {
 
     @Value("${spring.redis.host}")
-    private String hostName;
+    private String hostName = "192.168.102.96";
 
     @Value("${spring.redis.port}")
-    private String port;
+    private String port = "6379";
     
     @Value("${spring.redis.password}")
-    private String password;
+    private String password = "123456a@";
 
     @Bean
     JedisConnectionFactory jedisConnectionFactory() {
@@ -27,7 +27,6 @@ public class RedisConfig {
         jedisConFactory.setHostName(hostName);
         jedisConFactory.setPort(Integer.parseInt(port));
         jedisConFactory.setPassword(password);
-
         return jedisConFactory;
     }
 

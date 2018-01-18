@@ -15,7 +15,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import com.ssoserver.security.JwtAuthenticationEntryPoint;
-import com.ssoserver.security.JwtAuthenticationTokenFilter;
 
 @SuppressWarnings("SpringJavaAutowiringInspection")
 @Configuration
@@ -45,8 +44,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    public JwtAuthenticationTokenFilter authenticationTokenFilterBean() throws Exception {
-        return new JwtAuthenticationTokenFilter();
+    public AuthTokenFilter authenticationTokenFilterBean() throws Exception {
+        return new AuthTokenFilter();
     }
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {

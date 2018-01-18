@@ -1,6 +1,6 @@
 package com.ssoserver.redis.repository;
 
-import com.ssoserver.redis.model.RedisSession;
+import com.ssoserver.redis.model.AuthRedisSession;
 import com.ssoserver.utils.Constant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.HashOperations;
@@ -25,12 +25,12 @@ public class RedisSessionRepository {
         hashOperations = redisTemplate.opsForHash();
     }
 
-    public void save(RedisSession session) {
+    public void save(AuthRedisSession session) {
         hashOperations.put(Constant.REDIS_SESSION_KEY, session.getAccessToken(), session);
     }
 
-    public RedisSession findOne(String accessToken) {
-        return (RedisSession) hashOperations.get(Constant.REDIS_SESSION_KEY, accessToken);
+    public AuthRedisSession findOne(String accessToken) {
+        return (AuthRedisSession) hashOperations.get(Constant.REDIS_SESSION_KEY, accessToken);
     }
 
     public void delete(final String accessToken) {

@@ -1,30 +1,31 @@
 package com.ssoserver.model.entity;
 
-import lombok.Data;
-
 import javax.persistence.*;
-import java.io.Serializable;
 
 @Entity
-@Table(name="ORGANIZATION")
-public class Organization implements Serializable{
-    @Id
-    @Column(name="ID")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+@Table(name="APP")
+public class App {
     private Long id;
-
-    @Column(name="NAME", length=45)
+    private String appId;
     private String name;
-
-    @Column(name="DOMAIN", length=45)
     private String domain;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getAppId() {
+        return appId;
+    }
+
+    public void setAppId(String appId) {
+        this.appId = appId;
     }
 
     public String getName() {

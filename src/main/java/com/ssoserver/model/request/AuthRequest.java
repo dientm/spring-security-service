@@ -1,8 +1,11 @@
 package com.ssoserver.model.request;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class AuthRequest {
     private String username;
     private String password;
+    @JsonProperty("client_id")
     private String clientId;
 
     public AuthRequest() {

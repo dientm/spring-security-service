@@ -1,6 +1,7 @@
 package com.ssoserver.redis.service;
 
-import com.ssoserver.redis.model.RedisSession;
+import com.ssoserver.exception.ApplicationException;
+import com.ssoserver.redis.model.AuthRedisSession;
 import com.ssoserver.redis.repository.RedisSessionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -11,35 +12,21 @@ public class RedisSessionService {
     @Autowired
     private RedisSessionRepository redisSessionRepository;
 
-    public void save(RedisSession session) {
+    public void save(AuthRedisSession session) {
         redisSessionRepository.save(session);
     }
-
-    /**
-     * Find session stored in Redis and validate expire time
-     *
-     * @param accessToken
-     *
-     * @throws ApplicationException with ResultCode are (INVALID_TOKEN,
-     * TOKEN_EXPIRED)
-     *
-     * @return A RedisSession model, never return null
-     */
-    public RedisSession findAndValidate(String accessToken) {
-
-        RedisSession session = redisSessionRepository.findOne(accessToken);
+    public AuthRedisSession findByAccessToken(String accessToken) throws ApplicationException {
+        AuthRedisSession session = redisSessionRepository.findOne(accessToken);
         // validate already exist session
         if (session != null) {
-
             // validate session expire time
             if (session.getExpireTime() - System.currentTimeMillis() <= 0) {
-//                throw new ApplicationException(APIStatus.ERR_TOKEN_EXPIRED);
+                throw new ApplicationException("Token has been expired");
             }
 
         } else {
-//            throw new ApplicationException(APIStatus.ERR_INVALID_TOKEN);
+            throw new ApplicationException("Token not found");
         }
-
         return session;
     }
 
@@ -51,20 +38,15 @@ public class RedisSessionService {
      */
     public void validateAndDelete(String accessToken) {
 
-        RedisSession session = redisSessionRepository.findOne(accessToken);
+        AuthRedisSession session = redisSessionRepository.findOne(accessToken);
         // validate already exist session
         if (session != null) {
-
             // clear session
             redisSessionRepository.delete(accessToken);
 
         } else {
-//            throw new ApplicationException(APIStatus.ERR_INVALID_TOKEN);
+            throw new ApplicationException("Token not found");
         }
-    }
-
-    public RedisSession findByAccessToken(String accessToken) {
-        return redisSessionRepository.findOne(accessToken);
     }
 
 }

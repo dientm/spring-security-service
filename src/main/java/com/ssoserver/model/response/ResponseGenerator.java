@@ -20,7 +20,7 @@ public class ResponseGenerator {
         return new ResponseEntity(_createSSOResponse(apiStatus, data), httpStatus);
     }
 
-    public ResponseEntity<Response> successResponse(Object data) {
+    public ResponseEntity<Response> buildResponse(Object data) {
         return buildResponse(APIStatus.OK, data, HttpStatus.OK);
     }
 
