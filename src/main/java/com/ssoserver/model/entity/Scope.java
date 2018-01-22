@@ -1,20 +1,19 @@
 package com.ssoserver.model.entity;
 
-
-import lombok.Data;
-
 import javax.persistence.*;
-import java.util.List;
-import java.util.Set;
 
 @Entity
-@Table(name="SCOPE")
-public class Scope {
+@Table(name="PERMISSION")
+public class Scope_ {
     private Long id;
-    private String name;
-    private Set<Role> roles;
-    private Set<Permission> permissions;
 
+    private String url;
+
+    private String api;
+
+    private String method;
+
+    private Permission scope;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -22,32 +21,42 @@ public class Scope {
         return id;
     }
 
-    public String getName() {
-        return name;
-    }
-
     public void setId(Long id) {
         this.id = id;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getUrl() {
+        return url;
     }
 
-    @ManyToMany(mappedBy = "scopes")
-    public Set<Role> getRoles() {
-        return roles;
+    public void setUrl(String url) {
+        this.url = url;
     }
 
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
-    }
-    @OneToMany(mappedBy = "scope", cascade = CascadeType.ALL)
-    public Set<Permission> getPermissions() {
-        return permissions;
+    public String getApi() {
+        return api;
     }
 
-    public void setPermissions(Set<Permission> permissions) {
-        this.permissions = permissions;
+    public void setApi(String api) {
+        this.api = api;
+    }
+
+    public String getMethod() {
+        return method;
+    }
+
+    public void setMethod(String method) {
+        this.method = method;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "scope_id")
+    public Permission getScope() {
+        return scope;
+    }
+
+    public void setScope(Permission scope) {
+        this.scope = scope;
     }
 }
+
