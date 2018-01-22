@@ -1,6 +1,5 @@
 package com.ssoserver.api.admin;
 
-import com.ssoserver.model.response.Response;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -12,17 +11,17 @@ import org.springframework.web.bind.annotation.RestController;
 public class AppRoleController {
 
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<Response> getListRoleInApp(@RequestParam Long appId) {
+    public ResponseEntity<?> getListRoleInApp(@RequestParam Long appId) {
         return null;
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<Response> createAppRole(@RequestParam Long appId, RequestParam roleName) {
+    public ResponseEntity<?> createAppRole(@RequestParam Long appId, RequestParam roleName) {
         return null;
     }
 
     @RequestMapping(method = RequestMethod.DELETE)
-    public ResponseEntity<Response> deleteAppRole(@RequestParam Long appId, Long[] roleIds) {
+    public ResponseEntity<?> deleteAppRole(@RequestParam Long appId, Long[] roleIds) {
         return null;
     }
 }

@@ -1,17 +1,16 @@
 package com.ssoserver.model;
 
-import com.ssoserver.model.entity.App;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.ssoserver.model.entity.Organization;
 import com.ssoserver.model.entity.Role;
 import com.ssoserver.model.entity.Scope;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.Collection;
-import java.util.Date;
+import java.io.Serializable;
 import java.util.List;
+import java.util.Set;
 
-public class UserDetail implements UserDetails {
+@JsonIgnoreProperties({"authenticated", "password"})
+public class UserDetail implements Serializable{
 
     private Long id;
     private boolean authenticated;
@@ -21,11 +20,11 @@ public class UserDetail implements UserDetails {
     private String password;
     private String email;
     private String appId;
-    private Organization org;
-    private List<Role> roles;
-    private List<Scope> scopes;
+    private String org;
+    private List<String> roles;
+    private List<String> scopes;
 
-    public UserDetail(Long id, String username, String firstname, String lastname, String password, String email, String appId, Organization org, List<Role> roles, List<Scope> scopes) {
+    public UserDetail(Long id, String username, String firstname, String lastname, String password, String email, String appId, String org, List<String> roles, List<String> scopes) {
         this.id = id;
         this.username = username;
         this.firstname = firstname;
@@ -33,24 +32,29 @@ public class UserDetail implements UserDetails {
         this.password = password;
         this.email = email;
         this.appId = appId;
-        this.org = org;
+        this.org  = org;
         this.roles = roles;
         this.scopes = scopes;
     }
 
-    public List<Role> getRoles() {
+
+    public void setOrg(String org) {
+        this.org = org;
+    }
+
+    public List<String> getRoles() {
         return roles;
     }
 
-    public void setRoles(List<Role> roles) {
+    public void setRoles(List<String> roles) {
         this.roles = roles;
     }
 
-    public List<Scope> getScopes() {
+    public List<String> getScopes() {
         return scopes;
     }
 
-    public void setScopes(List<Scope> scopes) {
+    public void setScopes(List<String> scopes) {
         this.scopes = scopes;
     }
 
@@ -64,26 +68,6 @@ public class UserDetail implements UserDetails {
 
     public String getUsername() {
         return username;
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return false;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return false;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return false;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return false;
     }
 
     public void setUsername(String username) {
@@ -104,11 +88,6 @@ public class UserDetail implements UserDetails {
 
     public void setLastname(String lastname) {
         this.lastname = lastname;
-    }
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
     }
 
     public String getPassword() {
@@ -135,12 +114,8 @@ public class UserDetail implements UserDetails {
         this.appId = appId;
     }
 
-    public Organization getOrg() {
+    public String getOrg() {
         return org;
-    }
-
-    public void setOrg(Organization org) {
-        this.org = org;
     }
 
     public boolean isAuthenticated() {

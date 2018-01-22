@@ -1,6 +1,7 @@
 package com.ssoserver.model.entity;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name="APP")
@@ -9,6 +10,7 @@ public class App {
     private String appId;
     private String name;
     private String domain;
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

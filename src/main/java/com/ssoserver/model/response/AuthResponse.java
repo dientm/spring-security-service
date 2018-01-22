@@ -1,23 +1,25 @@
 package com.ssoserver.model.response;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class AuthResponse {
 
+    @JsonProperty("access_token")
     private String accessToken;
+    @JsonProperty("token_type")
     private String tokenType;
+    @JsonProperty("refresh_token")
     private String refreshToken;
-    private String publicKey;
+
+    public AuthResponse(String accessToken, String tokenType, String refreshToken) {
+        this.accessToken = accessToken;
+        this.tokenType = tokenType;
+        this.refreshToken = refreshToken;
+    }
 
     public AuthResponse() {
 
     }
-
-    public AuthResponse(String accessToken, String tokenType, String refreshToken, String publicKey) {
-        this.accessToken = accessToken;
-        this.tokenType = tokenType;
-        this.refreshToken = refreshToken;
-        this.publicKey = publicKey;
-    }
-
     public String getAccessToken() {
         return accessToken;
     }
@@ -42,11 +44,4 @@ public class AuthResponse {
         this.refreshToken = refreshToken;
     }
 
-    public String getPublicKey() {
-        return publicKey;
-    }
-
-    public void setPublicKey(String publicKey) {
-        this.publicKey = publicKey;
-    }
 }

@@ -1,6 +1,5 @@
 package com.ssoserver.api.admin;
 
-import com.ssoserver.model.response.Response;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -11,12 +10,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class AppUserDetailController {
 
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<Response> getUserDetail(Long appId, String userId) {
+    public ResponseEntity<?> getUserDetail(Long appId, String userId) {
         return null;
     }
 
     @RequestMapping(method = RequestMethod.PUT)
-    public ResponseEntity<Response> updateUserDetail(Long appId, String userId, Long roleId) {
+    public ResponseEntity<?> updateUserDetail(Long appId, String userId, Long roleId) {
         return null;
     }
 

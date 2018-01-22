@@ -1,19 +1,21 @@
 package com.ssoserver.model.entity;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
-@Table(name="PERMISSION")
-public class Scope_ {
+@Table(name="SCOPE")
+public class Scope {
     private Long id;
 
     private String url;
 
     private String api;
 
-    private String method;
+    private List<Role> roles;
 
-    private Permission scope;
+    private List<Action> actions;
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -41,22 +43,24 @@ public class Scope_ {
         this.api = api;
     }
 
-    public String getMethod() {
-        return method;
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "scope_role", joinColumns = @JoinColumn(name = "scope_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
+
+    public List<Role> getRoles() {
+        return roles;
     }
 
-    public void setMethod(String method) {
-        this.method = method;
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "scope_id")
-    public Permission getScope() {
-        return scope;
+    @OneToMany(mappedBy = "scope", cascade = CascadeType.ALL)
+    public List<Action> getActions() {
+        return actions;
     }
 
-    public void setScope(Permission scope) {
-        this.scope = scope;
+    public void setActions(List<Action> actions) {
+        this.actions = actions;
     }
 }
 

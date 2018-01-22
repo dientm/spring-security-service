@@ -7,5 +7,5 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 public interface UserDetailService {
     public UserDetail loadUserByUsername(String username) throws UsernameNotFoundException;
 
-    public UserDetail authorizeUser(AuthRequest authRequest);
+    public UserDetail authorizeUser(AuthRequest authRequest) throws UsernameNotFoundException ;
 }

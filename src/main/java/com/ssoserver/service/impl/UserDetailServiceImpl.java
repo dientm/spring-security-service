@@ -34,16 +34,17 @@ public class UserDetailServiceImpl implements UserDetailService {
                     user.getPassword(),
                     user.getEmail(),
                     user.getUserapp().getAppId(),
-                    new Organization(),
-                    new ArrayList<Role>(),
-                    new ArrayList<Scope>()
+                   "",
+                    new ArrayList<>(),
+//                    new ArrayList<Role>(),
+                    new ArrayList<>()
 
             );
         }
     }
 
     @Override
-    public UserDetail authorizeUser(AuthRequest authRequest) {
+    public UserDetail authorizeUser(AuthRequest authRequest) throws UsernameNotFoundException {
         UserDetail userDetail = loadUserByUsername(authRequest.getUsername());
 
         if (userDetail.getPassword().equalsIgnoreCase(authRequest.getPassword().trim()) &&

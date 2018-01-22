@@ -1,10 +1,6 @@
 package com.ssoserver.model.entity;
 
-import lombok.Data;
-
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.util.List;
 import java.util.Set;
 
@@ -13,8 +9,10 @@ import java.util.Set;
 public class Role {
     private Long id;
     private String name;
-    private List<Scope> scopes;
     private Set<User> users;
+    private Set<Scope> scopes;
+
+    private App app;
 
     public Role() {
     }
@@ -36,21 +34,32 @@ public class Role {
     public void setName(String name) {
         this.name = name;
     }
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "role_scope", joinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "scope_id", referencedColumnName = "id"))
-    public List<Scope> getScopes() {
-        return scopes;
-    }
 
-    public void setScopes(List<Scope> scopes) {
-        this.scopes = scopes;
-    }
     @ManyToMany(mappedBy = "roles")
     public Set<User> getUsers() {
         return users;
     }
 
+
     public void setUsers(Set<User> users) {
         this.users = users;
+    }
+
+    @ManyToMany(mappedBy = "roles")
+    public Set<Scope> getScopes() {
+        return scopes;
+    }
+
+    public void setScopes(Set<Scope> scopes) {
+        this.scopes = scopes;
+    }
+    @ManyToOne
+    @JoinColumn(name = "app_id")
+    public App getApp() {
+        return app;
+    }
+
+    public void setApp(App app) {
+        this.app = app;
     }
 }

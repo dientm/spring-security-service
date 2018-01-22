@@ -1,5 +1,6 @@
 package com.ssoserver;
 
+import com.ssoserver.security.KeyPairLoader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -46,6 +47,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public AuthTokenFilter authenticationTokenFilterBean() throws Exception {
         return new AuthTokenFilter();
+    }
+
+    @Bean
+    public KeyPairLoader initKeyPairLoader() throws Exception {
+        return new KeyPairLoader();
     }
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {

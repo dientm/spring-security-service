@@ -8,6 +8,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.PostConstruct;
+import java.util.concurrent.TimeUnit;
 
 @Repository
 public class RedisSessionRepository {
@@ -26,7 +27,13 @@ public class RedisSessionRepository {
     }
 
     public void save(AuthRedisSession session) {
-        hashOperations.put(Constant.REDIS_SESSION_KEY, session.getAccessToken(), session);
+        try {
+            hashOperations.put(Constant.REDIS_SESSION_KEY, session.getAccessToken(), session);
+            redisTemplate.expire(Constant.REDIS_SESSION_KEY, session.getExpireTime(), TimeUnit.SECONDS);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public AuthRedisSession findOne(String accessToken) {

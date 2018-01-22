@@ -24,18 +24,14 @@ public class JwtTokenUtil implements Serializable {
     static final String CLAIM_KEY_JTI = "jti";
     static final String CLAIM_KEY_USER = "user_info";
 
-    @Autowired
-    private TimeProvider timeProvider;
-
     @Value("${jwt.secret}")
     private String secret = "mySecret";
 
     @Value("${jwt.expiration}")
     private Long expiration = 3600L;
 
-    public String generateToken(UserDetail userDetail) {
+    public String generateToken(UserDetail userDetail) throws Exception {
         Map<String, Object> claims = new HashMap<String, Object>();
-        claims.put(CLAIM_KEY_JTI, "aaa");
         claims.put(CLAIM_KEY_CREATED, new Date());
         claims.put(CLAIM_KEY_USER, userDetail);
         Date createdDate = new Date();
@@ -46,10 +42,8 @@ public class JwtTokenUtil implements Serializable {
                 .setSubject(userDetail.getUsername())
                 .setIssuedAt(createdDate)
                 .setExpiration(expirationDate)
-                .signWith(SignatureAlgorithm.HS256, secret)
+                .signWith(SignatureAlgorithm.RS256, KeyPairLoader.getInstance().getKeyPair().getPrivate())
                 .compact();
-
-
     }
 
     public String getUsernameFromToken(String token) {
